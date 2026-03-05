@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2026全日本あぶくまウォーター大会 申込フォーム</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a3a6b;
+            --primary-light: #2a5298;
+            --accent: #0ea5e9;
+            --accent2: #06b6d4;
+            --success: #059669;
+            --danger: #dc2626;
+            --warn-bg: #fffbeb;
+            --warn-border: #f59e0b;
+            --info-bg: #eff6ff;
+            --info-border: #3b82f6;
+            --bg: #f1f5f9;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --radius: 12px;
+            --shadow: 0 4px 24px rgba(26,58,107,0.10);
+            --shadow-lg: 0 12px 40px rgba(26,58,107,0.18);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            color: var(--text);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f4c81 50%, #1565c0 100%);
+            color: white;
+            padding: 36px 24px 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -40px; left: -40px;
+            width: 200px; height: 200px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -60px; right: -20px;
+            width: 280px; height: 280px;
+            background: rgba(14,165,233,0.10);
+            border-radius: 50%;
+        }
+        .header-inner { position: relative; z-index: 1; }
+        .header h1 {
+            font-size: clamp(20px, 5vw, 28px);
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            margin-bottom: 8px;
+        }
+        .header-sub {
+            font-size: 14px;
+            opacity: 0.85;
+            margin-bottom: 6px;
+        }
+        .header-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            padding: 4px 16px;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            background: var(--card);
+            border-radius: 0 0 var(--radius) var(--radius);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .form-content { padding: 32px 28px; }
+
+        /* ===== SECTION ===== */
+        .section {
+            margin-bottom: 36px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+        .section:last-of-type { border-bottom: none; }
+
+        .section-title {
+            font-size: 17px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+
+        /* ===== FORM ELEMENTS ===== */
+        .form-group { margin-bottom: 18px; }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .required {
+            color: var(--danger);
+            margin-left: 3px;
+            font-size: 12px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            color: var(--text);
+            background: #fff;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="date"]:focus,
+        input[type="number"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(14,165,233,0.12);
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2364748b' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 36px;
+        }
+
+        textarea { resize: vertical; min-height: 90px; }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        /* ===== INFO / WARN BOXES ===== */
+        .info-box {
+            background: var(--info-bg);
+            border-left: 4px solid var(--info-border);
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 18px;
+            font-size: 13px;
+            color: #1e40af;
+            line-height: 1.7;
+        }
+        .warn-box {
+            background: var(--warn-bg);
+            border-left: 4px solid var(--warn-border);
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 18px;
+            font-size: 13px;
+            color: #92400e;
+            line-height: 1.7;
+        }
+
+        /* ===== ATHLETES SECTION ===== */
+        .athletes-section {
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .athlete-entry {
+            background: white;
+            padding: 18px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+            position: relative;
+        }
+        .athlete-entry:last-child { margin-bottom: 0; }
+
+        .athlete-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .athlete-number {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 15px;
+        }
+
+        .add-athlete-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: white;
+            border: none;
+            padding: 11px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: inherit;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            touch-action: manipulation;
+        }
+        .add-athlete-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(14,165,233,0.35);
+        }
+        .add-athlete-btn:active { transform: translateY(0); }
+
+        .remove-athlete-btn {
+            background: #fee2e2;
+            color: var(--danger);
+            border: 1px solid #fca5a5;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            font-family: inherit;
+            transition: all 0.2s;
+            touch-action: manipulation;
+        }
+        .remove-athlete-btn:hover { background: #fca5a5; }
+
+        /* ===== CHECKBOX ===== */
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            cursor: pointer;
+            margin-top: 2px;
+            accent-color: var(--accent);
+        }
+        .checkbox-group label {
+            margin: 0;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* ===== PRICE SUMMARY ===== */
+        .summary-section {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            border: 1px solid var(--border);
+        }
+        .summary-section.show { display: block; }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+        .summary-item:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 18px;
+            margin-top: 6px;
+            padding-top: 14px;
+            border-top: 2px solid var(--primary-light);
+            color: var(--primary);
+        }
+
+        /* ===== SUBMIT BUTTON ===== */
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 700;
+            font-family: inherit;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.25s;
+            letter-spacing: 0.03em;
+            touch-action: manipulation;
+        }
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(26,58,107,0.35);
+        }
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* ===== ACCOMMODATION SUBSECTION ===== */
+        .accommodation-group {
+            background: white;
+            padding: 18px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border);
+        }
+        .accommodation-group h4 {
+            margin-bottom: 12px;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* ===== CONFIRMATION OVERLAY ===== */
+        .confirmation-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 9999;
+            overflow-y: auto;
+            padding: 16px;
+            backdrop-filter: blur(3px);
+        }
+        .confirmation-overlay.show {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 20px;
+        }
+
+        .confirmation-content {
+            background: white;
+            border-radius: 16px;
+            max-width: 780px;
+            width: 100%;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+            overflow: hidden;
+        }
+
+        .confirmation-header {
+            background: linear-gradient(135deg, var(--success) 0%, #10b981 100%);
+            color: white;
+            padding: 28px 24px;
+            text-align: center;
+        }
+        .confirmation-header h2 { font-size: 22px; margin-bottom: 6px; }
+        .confirmation-header p { opacity: 0.9; font-size: 14px; }
+
+        .confirmation-body { padding: 24px; }
+
+        .confirmation-section {
+            margin-bottom: 22px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--border);
+        }
+        .confirmation-section:last-of-type { border-bottom: none; }
+        .confirmation-section h3 {
+            color: var(--primary);
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .confirmation-item {
+            display: flex;
+            padding: 7px 0;
+            font-size: 14px;
+            gap: 12px;
+        }
+        .confirmation-item-label {
+            font-weight: 600;
+            color: var(--text-muted);
+            min-width: 140px;
+            flex-shrink: 0;
+        }
+        .confirmation-item-value { color: var(--text); flex: 1; }
+
+        .athlete-card {
+            background: #f8fafc;
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--accent);
+        }
+        .athlete-card strong { display: block; color: var(--accent); margin-bottom: 8px; font-size: 13px; }
+
+        .btn-row { display: flex; gap: 10px; flex-direction: column; margin-top: 16px; }
+
+        .download-pdf-btn, .close-confirmation-btn {
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: inherit;
+            width: 100%;
+            transition: all 0.2s;
+            touch-action: manipulation;
+        }
+        .download-pdf-btn {
+            background: linear-gradient(135deg, var(--success), #10b981);
+            color: white;
+        }
+        .download-pdf-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        .close-confirmation-btn {
+            background: #f1f5f9;
+            color: var(--primary);
+            border: 1.5px solid var(--border);
+        }
+        .close-confirmation-btn:hover { background: var(--border); }
+
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            body { background: white !important; font-size: 12pt; }
+            .container { box-shadow: none !important; border-radius: 0 !important; }
+            .header { background: var(--primary) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .submit-btn, .add-athlete-btn, .remove-athlete-btn { display: none !important; }
+            .confirmation-overlay { display: none !important; }
+            .section { break-inside: avoid; }
+            .athlete-entry { break-inside: avoid; border-left: 3px solid #0ea5e9 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            input, select, textarea { border: 1px solid #ccc !important; }
+            .summary-section { display: block !important; border: 1px solid #ccc !important; }
+            .info-box, .warn-box { border: 1px solid #ccc !important; background: #f9f9f9 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            @page { margin: 1.5cm; size: A4; }
+        }
+
+        /* ===== MOBILE ===== */
+        @media (max-width: 640px) {
+            .form-content { padding: 20px 16px; }
+            .row { grid-template-columns: 1fr; gap: 0; }
+            .header { padding: 28px 16px 24px; }
+            .header h1 { font-size: 18px; }
+            .section-title { font-size: 15px; }
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"],
+            input[type="date"],
+            input[type="number"],
+            select, textarea {
+                font-size: 16px; /* prevent iOS zoom */
+                padding: 13px 14px;
+            }
+            .confirmation-content { border-radius: 12px; }
+            .confirmation-body { padding: 16px; }
+            .confirmation-item { flex-direction: column; gap: 2px; }
+            .confirmation-item-label { min-width: unset; }
+            .athlete-entry { padding: 14px; }
+            .athletes-section { padding: 12px; }
+            .submit-btn { font-size: 16px; padding: 15px; }
+            .section { margin-bottom: 28px; padding-bottom: 24px; }
+        }
+
+        @media (max-width: 400px) {
+            .confirmation-overlay { padding: 8px; }
+            .confirmation-overlay.show { padding-top: 8px; }
+        }
+
+        /* ===== STEP PROGRESS ===== */
+        .progress-bar-wrap {
+            background: #e2e8f0;
+            height: 4px;
+            border-radius: 2px;
+            margin: 0 0 28px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 24px; left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: var(--text);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 99999;
+            transition: transform 0.3s ease;
+            white-space: nowrap;
+            max-width: 90vw;
+            text-align: center;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* ===== SENDING OVERLAY ===== */
+        .sending-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 16px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            backdrop-filter: blur(3px);
+        }
+        .sending-overlay.show { display: flex; }
+        .spinner {
+            width: 48px; height: 48px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-inner">
+                <h1>2026全日本あぶくまウォーター大会</h1>
+                <p class="header-sub">Canoe Spring Camp in FUKUSHIMA</p>
+                <span class="header-badge">参加申込フォーム</span>
+            </div>
+        </div>
+
+        <div class="form-content">
+            <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+
+            <form id="applicationForm" novalidate>
+
+                <!-- 所属情報 -->
+                <div class="section">
+                    <h2 class="section-title">
+                        所属情報
+                    </h2>
+
+                    <div class="form-group">
+                        <label>所属団体名<span class="required">*</span></label>
+                        <input type="text" name="organization" required placeholder="例：○○高等学校カヌー部" autocomplete="organization">
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label>代表者氏名<span class="required">*</span></label>
+                            <input type="text" name="representative" required placeholder="例：山田 太郎" autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <label>役職<span class="required">*</span></label>
+                            <select name="position" required>
+                                <option value="">選択してください</option>
+                                <option value="監督">監督</option>
+                                <option value="保護者">保護者</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label>電話番号<span class="required">*</span></label>
+                            <input type="tel" name="phone" required placeholder="例：090-1234-5678" autocomplete="tel">
+                        </div>
+                        <div class="form-group">
+                            <label>メールアドレス<span class="required">*</span></label>
+                            <input type="email" name="email" required placeholder="例：example@email.com" autocomplete="email">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 選手情報 -->
+                <div class="section">
+                    <h2 class="section-title">
+                        選手情報
+                    </h2>
+
+                    <div class="warn-box">
+                        選手の氏名・学年・生年月日等、間違いのないよう十分ご注意ください
+                    </div>
+
+                    <div class="athletes-section" id="athletesSection">
+                        <!-- 選手エントリーはJavaScriptで動的に追加 -->
+                    </div>
+
+                    <button type="button" class="add-athlete-btn" onclick="addAthlete()">
+                        選手を追加
+                    </button>
+                </div>
+
+                <!-- 審判役員 -->
+                <div class="section">
+                    <h2 class="section-title">
+                        審判役員
+                    </h2>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="referee_available" name="referee_available" onchange="toggleRefereeSection()">
+                        <label for="referee_available">審判役員として協力可能です</label>
+                    </div>
+
+                    <div id="refereeSection" style="display: none; margin-top: 20px;">
+                        <div class="info-box">
+                            審判役員として協力いただける方の情報をご入力ください
+                        </div>
+                        <div class="athletes-section" id="refereesSection"></div>
+                        <button type="button" class="add-athlete-btn" onclick="addReferee()">
+                            審判役員を追加
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 借艇申込 -->
+                <div class="section">
+                    <h2 class="section-title">
+                        借艇申込
+                    </h2>
+
+                    <div class="info-box">
+                        K-1：ヒカリ社製レーザー、C-1：ヒカリ社製デルタ<br>
+                        レンタル料：大会期間中1艇 <strong>3,000円</strong><br>
+                        小学生用普及艇のみ無償レンタル（5/4のみ）
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label>借艇希望数（K-1）</label>
+                            <input type="number" name="rental_k1" min="0" value="0" onchange="calculateTotal()">
+                        </div>
+                        <div class="form-group">
+                            <label>借艇希望数（C-1）</label>
+                            <input type="number" name="rental_c1" min="0" value="0" onchange="calculateTotal()">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>借艇希望数（小学生用普及艇・無償）</label>
+                        <input type="number" name="rental_elementary" min="0" value="0">
+                    </div>
+                </div>
+
+                <!-- 弁当申込 -->
+                <div class="section">
+                    <h2 class="section-title">
+                        弁当申込
+                    </h2>
+
+                    <div class="info-box">
+                        弁当の引換：当日11:30〜13:00の間に指定場所にて<br>
+                        ※大会当日の申込は不可。申込後の変更・取消及び引換券の再発行はできません
+                    </div>
+
+                    <div class="form-group">
+                        <label>5月2日（金）弁当 &nbsp;<strong>800円</strong></label>
+                        <input type="number" name="lunch_day1" min="0" value="0" onchange="calculateTotal()">
+                    </div>
+                    <div class="form-group">
+                        <label>5月3日（土）おにぎり2個 &nbsp;<strong>500円</strong>（豚汁ふるまい有）</label>
+                        <input type="number" name="lunch_day2" min="0" value="0" onchange="calculateTotal()">
+                    </div>
+                    <div class="form-group">
+                        <label>5月4日（日）弁当 &nbsp;<strong>800円</strong></label>
+                        <input type="number" name="lunch_day3" min="0" value="0" onchange="calculateTotal()">
+                    </div>
+                </div>
+
+                <!-- 宿泊申込 -->
+                <div class="section">
+                    <h2 class="section-title">
+                        宿泊申込
+                    </h2>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="accommodation" name="accommodation" onchange="toggleAccommodationSection()">
+                        <label for="accommodation">宿泊の斡旋を希望する</label>
+                    </div>
+
+                    <div id="accommodationSection" style="display: none; margin-top: 20px;">
+                        <div class="form-group">
+                            <label>宿泊施設<span class="required">*</span></label>
+                            <select name="accommodation_facility" id="accommodation_facility">
+                                <option value="">選択してください</option>
+                                <option value="ウッディハウスとうわ">ウッディハウスとうわ</option>
+                                <option value="智恵子の湯">智恵子の湯</option>
+                            </select>
+                        </div>
+                        <div class="info-box">
+                            男女別、選手・監督・保護者別に宿泊人数をご入力ください
+                        </div>
+                        <div class="accommodation-group">
+                            <h4>選手</h4>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label>男子選手</label>
+                                    <input type="number" name="accommodation_athlete_male" min="0" value="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>女子選手</label>
+                                    <input type="number" name="accommodation_athlete_female" min="0" value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accommodation-group">
+                            <h4>監督</h4>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label>男性監督</label>
+                                    <input type="number" name="accommodation_coach_male" min="0" value="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>女性監督</label>
+                                    <input type="number" name="accommodation_coach_female" min="0" value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accommodation-group">
+                            <h4>保護者</h4>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label>男性保護者</label>
+                                    <input type="number" name="accommodation_parent_male" min="0" value="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>女性保護者</label>
+                                    <input type="number" name="accommodation_parent_female" min="0" value="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 料金確認 -->
+                <div class="section">
+                    <h2 class="section-title">
+                        料金確認
+                    </h2>
+
+                    <div class="info-box">
+                        <strong>振込先：</strong>ふくしま未来農業協同組合 東和支店<br>
+                        普通 0003679 ／ 口座名義：福島県カヌー協会
+                    </div>
+
+                    <div class="summary-section" id="summarySection">
+                        <div class="summary-item">
+                            <span>中学生・高校生参加料</span>
+                            <span id="feeHighSchool">0円</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>小学生参加料</span>
+                            <span id="feeElementary">0円</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>借艇料</span>
+                            <span id="rentalFee">0円</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>弁当代</span>
+                            <span id="lunchFee">0円</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>合計金額</span>
+                            <span id="totalFee">0円</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- その他・備考 -->
+                <div class="section">
+                    <h2 class="section-title">
+                        その他・備考
+                    </h2>
+
+                    <div class="form-group">
+                        <label>ご質問など</label>
+                        <textarea name="notes" placeholder="ご質問があればご記入ください"></textarea>
+                    </div>
+
+                    <div class="checkbox-group" style="margin-top: 12px;">
+                        <input type="checkbox" id="agree" name="agree" required>
+                        <label for="agree">大会要項を確認し、記載事項に同意します<span class="required">*</span></label>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">申込内容を送信する</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 送信中オーバーレイ -->
+    <div class="sending-overlay" id="sendingOverlay">
+        <div class="spinner"></div>
+        <span id="sendingMsg">送信中...</span>
+    </div>
+
+    <!-- 送信完了確認画面 -->
+    <div class="confirmation-overlay" id="confirmationOverlay">
+        <div class="confirmation-content">
+            <div class="confirmation-header">
+                <h2>申込を受け付けました</h2>
+                <p>ご登録いただいたメールアドレスに確認メールが届きます</p>
+            </div>
+            <div class="confirmation-body" id="confirmationBody"></div>
+        </div>
+    </div>
+
+    <!-- トースト通知 -->
+    <div class="toast" id="toast"></div>
+
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+    // =============================================
+    // ★ 設定：Google Apps Script WebアプリのURL
+    // =============================================
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyNrmN47riWgkFpToBTAfKrEqUkPsGZ6jKVbR3iDa8m-RRmkD7lH3phEVi9cNMRjE0dUg/exec';
+
+    // =============================================
+
+    let athleteCount = 0;
+    let refereeCount = 0;
+
+    window.onload = function() {
+        addAthlete();
+        updateProgress();
+        document.getElementById('applicationForm').addEventListener('input', updateProgress);
+    };
+
+    // ===== トースト通知 =====
+    function showToast(msg, duration = 3000) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), duration);
+    }
+
+    // ===== プログレスバー =====
+    function updateProgress() {
+        const required = document.querySelectorAll('[required]');
+        let filled = 0;
+        required.forEach(el => {
+            if (el.type === 'checkbox') { if (el.checked) filled++; }
+            else if (el.value && el.value.trim()) filled++;
+        });
+        const pct = required.length ? Math.round((filled / required.length) * 100) : 0;
+        document.getElementById('progressBar').style.width = pct + '%';
+    }
+
+    // ===== 審判役員 =====
+    function toggleRefereeSection() {
+        const cb = document.getElementById('referee_available');
+        const sec = document.getElementById('refereeSection');
+        sec.style.display = cb.checked ? 'block' : 'none';
+        if (cb.checked && refereeCount === 0) addReferee();
+    }
+
+    function addReferee() {
+        refereeCount++;
+        const sec = document.getElementById('refereesSection');
+        const el = document.createElement('div');
+        el.className = 'athlete-entry';
+        el.id = `referee-${refereeCount}`;
+        el.innerHTML = `
+            <div class="athlete-header">
+                <span class="athlete-number">審判役員 ${refereeCount}</span>
+                ${refereeCount > 1 ? `<button type="button" class="remove-athlete-btn" onclick="removeReferee(${refereeCount})">削除</button>` : ''}
+            </div>
+            <div class="form-group">
+                <label>氏名<span class="required">*</span></label>
+                <input type="text" name="referee_name_${refereeCount}" placeholder="例：山田 太郎">
+            </div>`;
+        sec.appendChild(el);
+    }
+
+    function removeReferee(id) {
+        document.getElementById(`referee-${id}`)?.remove();
+    }
+
+    // ===== 選手 =====
+    function addAthlete() {
+        athleteCount++;
+        const sec = document.getElementById('athletesSection');
+        const el = document.createElement('div');
+        el.className = 'athlete-entry';
+        el.id = `athlete-${athleteCount}`;
+        el.innerHTML = `
+            <div class="athlete-header">
+                <span class="athlete-number">選手 ${athleteCount}</span>
+                ${athleteCount > 1 ? `<button type="button" class="remove-athlete-btn" onclick="removeAthlete(${athleteCount})">削除</button>` : ''}
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label>氏名（漢字）<span class="required">*</span></label>
+                    <input type="text" name="athlete_name_${athleteCount}" required placeholder="例：山田 花子">
+                </div>
+                <div class="form-group">
+                    <label>氏名（ふりがな）<span class="required">*</span></label>
+                    <input type="text" name="athlete_kana_${athleteCount}" required placeholder="例：やまだ はなこ">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label>学年<span class="required">*</span></label>
+                    <select name="athlete_grade_${athleteCount}" required onchange="updateCompetitionOptions(${athleteCount}); calculateTotal(); updateProgress()">
+                        <option value="">選択してください</option>
+                        <option value="小1">小学1年生</option>
+                        <option value="小2">小学2年生</option>
+                        <option value="小3">小学3年生</option>
+                        <option value="小4">小学4年生</option>
+                        <option value="小5">小学5年生</option>
+                        <option value="小6">小学6年生</option>
+                        <option value="中1">中学1年生</option>
+                        <option value="中2">中学2年生</option>
+                        <option value="中3">中学3年生</option>
+                        <option value="高1">高校1年生</option>
+                        <option value="高2">高校2年生</option>
+                        <option value="高3">高校3年生</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>生年月日<span class="required">*</span></label>
+                    <input type="text" name="athlete_birthday_${athleteCount}" required placeholder="例：2010/04/05" pattern="\d{4}/\d{2}/\d{2}" inputmode="decimal"><small style="color:var(--text-muted);font-size:12px;display:block;margin-top:4px;">※ 西暦で入力（例：2010/04/05）</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label>性別<span class="required">*</span></label>
+                    <select name="athlete_gender_${athleteCount}" required onchange="updateCompetitionOptions(${athleteCount}); updateProgress()">
+                        <option value="">選択してください</option>
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>日本カヌー連盟登録番号</label>
+                    <input type="text" name="athlete_jcf_number_${athleteCount}" placeholder="例：123456">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>参加種目<span class="required">*</span></label>
+                <select name="athlete_competition_${athleteCount}" id="competition_${athleteCount}" required>
+                    <option value="">学年と性別を先に選択してください</option>
+                </select>
+            </div>
+            <div class="form-group" id="besttime_group_${athleteCount}" style="display:none;">
+                <label>ベストタイム（500m）</label>
+                <input type="text" name="athlete_besttime_${athleteCount}" placeholder="例：2:15.30">
+                <small style="color:var(--text-muted);font-size:12px;display:block;margin-top:4px;">※中学生・高校生のみ入力してください</small>
+            </div>`;
+        sec.appendChild(el);
+        updateProgress();
+    }
+
+    function removeAthlete(id) {
+        document.getElementById(`athlete-${id}`)?.remove();
+        calculateTotal();
+        updateProgress();
+    }
+
+    function updateCompetitionOptions(id) {
+        const grade = document.querySelector(`select[name="athlete_grade_${id}"]`).value;
+        const gender = document.querySelector(`select[name="athlete_gender_${id}"]`).value;
+        const sel = document.getElementById(`competition_${id}`);
+        const btg = document.getElementById(`besttime_group_${id}`);
+        sel.innerHTML = '<option value="">選択してください</option>';
+        if (!grade || !gender) {
+            sel.innerHTML = '<option value="">学年と性別を先に選択してください</option>';
+            if (btg) btg.style.display = 'none';
+            return;
+        }
+        if (grade.startsWith('小')) {
+            sel.innerHTML += '<option value="200m普及艇">200m普及艇</option>';
+            if (btg) btg.style.display = 'none';
+        } else {
+            sel.innerHTML += `
+                <option value="500m カヤックシングル">500m カヤックシングル (K-1)</option>
+                <option value="500m カナディアンシングル">500m カナディアンシングル (C-1)</option>`;
+            if (btg) btg.style.display = 'block';
+        }
+    }
+
+    // ===== 宿泊 =====
+    function toggleAccommodationSection() {
+        const cb = document.getElementById('accommodation');
+        document.getElementById('accommodationSection').style.display = cb.checked ? 'block' : 'none';
+    }
+
+    // ===== 料金計算 =====
+    function calculateTotal() {
+        let hs = 0, el = 0;
+        document.querySelectorAll('.athlete-entry').forEach(entry => {
+            const g = entry.querySelector('select[name^="athlete_grade_"]');
+            if (g && g.value) {
+                if (g.value.startsWith('小')) el++;
+                else hs++;
+            }
+        });
+        const feeHS = hs * 4000;
+        const feeEl = el * 2500;
+        const k1 = parseInt(document.querySelector('input[name="rental_k1"]').value) || 0;
+        const c1 = parseInt(document.querySelector('input[name="rental_c1"]').value) || 0;
+        const rental = (k1 + c1) * 3000;
+        const d1 = parseInt(document.querySelector('input[name="lunch_day1"]').value) || 0;
+        const d2 = parseInt(document.querySelector('input[name="lunch_day2"]').value) || 0;
+        const d3 = parseInt(document.querySelector('input[name="lunch_day3"]').value) || 0;
+        const lunch = d1 * 800 + d2 * 500 + d3 * 800;
+        const total = feeHS + feeEl + rental + lunch;
+
+        document.getElementById('feeHighSchool').textContent = feeHS.toLocaleString() + '円';
+        document.getElementById('feeElementary').textContent = feeEl.toLocaleString() + '円';
+        document.getElementById('rentalFee').textContent = rental.toLocaleString() + '円';
+        document.getElementById('lunchFee').textContent = lunch.toLocaleString() + '円';
+        document.getElementById('totalFee').textContent = total.toLocaleString() + '円';
+        if (total > 0) document.getElementById('summarySection').classList.add('show');
+    }
+
+    // ===== フォーム送信 =====
+    document.getElementById('applicationForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // バリデーション
+        const requiredFields = this.querySelectorAll('[required]');
+        let valid = true;
+        requiredFields.forEach(f => {
+            if (f.type === 'checkbox') {
+                if (!f.checked) { valid = false; f.style.outline = '2px solid red'; }
+                else f.style.outline = '';
+            } else {
+                if (!f.value.trim()) { valid = false; f.style.borderColor = 'red'; }
+                else f.style.borderColor = '';
+            }
+        });
+        if (!valid) {
+            showToast('必須項目を入力してください');
+            this.querySelector('[required]:invalid, [required][value=""]')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+
+        const submitBtn = document.querySelector('.submit-btn');
+        submitBtn.disabled = true;
+        document.getElementById('sendingMsg').textContent = '送信中...';
+        document.getElementById('sendingOverlay').classList.add('show');
+
+        const formData = new FormData(this);
+
+        // 選手情報
+        const athletes = [];
+        document.querySelectorAll('#athletesSection .athlete-entry').forEach(entry => {
+            athletes.push({
+                name: entry.querySelector(`input[name^="athlete_name_"]`)?.value || '',
+                kana: entry.querySelector(`input[name^="athlete_kana_"]`)?.value || '',
+                grade: entry.querySelector(`select[name^="athlete_grade_"]`)?.value || '',
+                birthday: entry.querySelector(`input[name^="athlete_birthday_"]`)?.value || '',
+                gender: entry.querySelector(`select[name^="athlete_gender_"]`)?.value || '',
+                competition: entry.querySelector(`select[name^="athlete_competition_"]`)?.value || '',
+                jcfNumber: entry.querySelector(`input[name^="athlete_jcf_number_"]`)?.value || '',
+                besttime: entry.querySelector(`input[name^="athlete_besttime_"]`)?.value || ''
+            });
+        });
+
+        // 審判役員
+        const referees = [];
+        if (formData.get('referee_available')) {
+            document.querySelectorAll('#refereesSection .athlete-entry').forEach(entry => {
+                const n = entry.querySelector(`input[name^="referee_name_"]`);
+                if (n && n.value) referees.push(n.value);
+            });
+        }
+
+        const submitData = {
+            timestamp: new Date().toLocaleString('ja-JP'),
+            organization: formData.get('organization'),
+            representative: formData.get('representative'),
+            position: formData.get('position'),
+            phone: formData.get('phone'),
+            email: formData.get('email'),
+            athletes,
+            rental: {
+                k1: parseInt(formData.get('rental_k1')) || 0,
+                c1: parseInt(formData.get('rental_c1')) || 0,
+                elementary: parseInt(formData.get('rental_elementary')) || 0
+            },
+            lunch: {
+                day1: parseInt(formData.get('lunch_day1')) || 0,
+                day2: parseInt(formData.get('lunch_day2')) || 0,
+                day3: parseInt(formData.get('lunch_day3')) || 0
+            },
+            accommodation: {
+                facility: formData.get('accommodation_facility') || '',
+                athleteMale: parseInt(formData.get('accommodation_athlete_male')) || 0,
+                athleteFemale: parseInt(formData.get('accommodation_athlete_female')) || 0,
+                coachMale: parseInt(formData.get('accommodation_coach_male')) || 0,
+                coachFemale: parseInt(formData.get('accommodation_coach_female')) || 0,
+                parentMale: parseInt(formData.get('accommodation_parent_male')) || 0,
+                parentFemale: parseInt(formData.get('accommodation_parent_female')) || 0
+            },
+            referees,
+            notes: formData.get('notes') || '',
+            totalFee: document.getElementById('totalFee').textContent
+        };
+
+        let hasResponded = false;
+
+        // タイムアウト（10秒）
+        const timeoutId = setTimeout(() => {
+            if (!hasResponded) {
+                hasResponded = true;
+                document.getElementById('sendingOverlay').classList.remove('show');
+                showConfirmation(submitData);
+            }
+        }, 10000);
+
+        try {
+            await fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(submitData)
+            });
+            clearTimeout(timeoutId);
+            if (!hasResponded) {
+                hasResponded = true;
+                document.getElementById('sendingOverlay').classList.remove('show');
+                showConfirmation(submitData);
+            }
+        } catch (err) {
+            clearTimeout(timeoutId);
+            if (!hasResponded) {
+                hasResponded = true;
+                document.getElementById('sendingOverlay').classList.remove('show');
+                showToast('通信エラーが発生しました。内容を確認してPDFを保存してください。', 5000);
+                showConfirmation(submitData);
+            }
+        }
+    });
+
+    // ===== 確認画面 =====
+    function showConfirmation(data) {
+        const body = document.getElementById('confirmationBody');
+        let html = '';
+
+        // 団体情報
+        html += `<div class="confirmation-section">
+            <h3>団体情報</h3>
+            ${ci('団体名', data.organization)}
+            ${ci('代表者名', data.representative)}
+            ${ci('役職', data.position)}
+            ${ci('電話番号', data.phone)}
+            ${ci('メールアドレス', data.email)}
+        </div>`;
+
+        // 選手
+        html += `<div class="confirmation-section"><h3>参加選手（${data.athletes.length}名）</h3>`;
+        data.athletes.forEach((a, i) => {
+            html += `<div class="athlete-card">
+                <strong>選手${i + 1}</strong>
+                ${ci('氏名', `${a.name}（${a.kana}）`)}
+                ${ci('学年', a.grade)}
+                ${ci('性別', a.gender)}
+                ${ci('生年月日', a.birthday)}
+                ${ci('参加種目', a.competition)}
+                ${a.jcfNumber ? ci('JCF登録番号', a.jcfNumber) : ''}
+                ${a.besttime ? ci('ベストタイム', a.besttime) : ''}
+            </div>`;
+        });
+        html += '</div>';
+
+        // 借艇
+        if (data.rental.k1 > 0 || data.rental.c1 > 0 || data.rental.elementary > 0) {
+            html += `<div class="confirmation-section"><h3>借艇</h3>
+                ${data.rental.k1 > 0 ? ci('K-1', data.rental.k1 + '艇') : ''}
+                ${data.rental.c1 > 0 ? ci('C-1', data.rental.c1 + '艇') : ''}
+                ${data.rental.elementary > 0 ? ci('小学生用普及艇', data.rental.elementary + '艇') : ''}
+            </div>`;
+        }
+
+        // 弁当
+        if (data.lunch.day1 > 0 || data.lunch.day2 > 0 || data.lunch.day3 > 0) {
+            html += `<div class="confirmation-section"><h3>弁当申込</h3>
+                ${data.lunch.day1 > 0 ? ci('5月2日(金) 弁当', data.lunch.day1 + '個') : ''}
+                ${data.lunch.day2 > 0 ? ci('5月3日(土) おにぎり', data.lunch.day2 + '個') : ''}
+                ${data.lunch.day3 > 0 ? ci('5月4日(日) 弁当', data.lunch.day3 + '個') : ''}
+            </div>`;
+        }
+
+        // 宿泊
+        if (data.accommodation.facility) {
+            const tot = data.accommodation.athleteMale + data.accommodation.athleteFemale +
+                        data.accommodation.coachMale + data.accommodation.coachFemale +
+                        data.accommodation.parentMale + data.accommodation.parentFemale;
+            if (tot > 0) {
+                html += `<div class="confirmation-section"><h3>宿泊申込</h3>
+                    ${ci('施設', data.accommodation.facility)}
+                    ${data.accommodation.athleteMale > 0 ? ci('男子選手', data.accommodation.athleteMale + '名') : ''}
+                    ${data.accommodation.athleteFemale > 0 ? ci('女子選手', data.accommodation.athleteFemale + '名') : ''}
+                    ${data.accommodation.coachMale > 0 ? ci('男性監督', data.accommodation.coachMale + '名') : ''}
+                    ${data.accommodation.coachFemale > 0 ? ci('女性監督', data.accommodation.coachFemale + '名') : ''}
+                    ${data.accommodation.parentMale > 0 ? ci('男性保護者', data.accommodation.parentMale + '名') : ''}
+                    ${data.accommodation.parentFemale > 0 ? ci('女性保護者', data.accommodation.parentFemale + '名') : ''}
+                </div>`;
+            }
+        }
+
+        // 審判
+        if (data.referees && data.referees.length > 0) {
+            html += `<div class="confirmation-section"><h3>審判役員（${data.referees.length}名）</h3>`;
+            data.referees.forEach((r, i) => { html += ci(`役員${i+1}`, r); });
+            html += '</div>';
+        }
+
+        // 金額
+        html += `<div class="confirmation-section">
+            <h3>お支払い金額</h3>
+            <div class="confirmation-item">
+                <span class="confirmation-item-label" style="font-size:16px;color:var(--primary);">合計</span>
+                <span class="confirmation-item-value" style="font-size:22px;font-weight:700;color:var(--primary);">${data.totalFee}</span>
+            </div>
+            <div class="info-box" style="margin-top:12px;">
+                <strong>振込先：</strong>ふくしま未来農業協同組合 東和支店<br>
+                普通 0003679 ／ 口座名義：福島県カヌー協会
+            </div>
+        </div>`;
+
+        if (data.notes) {
+            html += `<div class="confirmation-section"><h3>備考</h3>
+                <div class="confirmation-item-value">${data.notes}</div>
+            </div>`;
+        }
+
+        html += `<div class="btn-row">
+            <button type="button" class="download-pdf-btn" onclick="downloadPDF()">申込内容をPDFでダウンロード</button>
+            <button type="button" class="close-confirmation-btn" onclick="closeConfirmation()">閉じる（フォームをリセット）</button>
+        </div>`;
+
+        body.innerHTML = html;
+        document.getElementById('confirmationOverlay').classList.add('show');
+        window.currentSubmitData = data;
+    }
+
+    function ci(label, value) {
+        return `<div class="confirmation-item">
+            <span class="confirmation-item-label">${label}</span>
+            <span class="confirmation-item-value">${value}</span>
+        </div>`;
+    }
+
+    // ===== PDF生成（日本語対応） =====
+    function downloadPDF() {
+        var data = window.currentSubmitData;
+        if (!data) return;
+        showToast('申込確認書を開いています...');
+
+        var printWin = window.open('', '_blank');
+        var body = document.getElementById('confirmationBody').innerHTML;
+        var today = new Date().toLocaleDateString('ja-JP');
+
+        var html = '<!DOCTYPE html>';
+        html += '<html lang="ja"><head>';
+        html += '<meta charset="UTF-8">';
+        html += '<title>2026全日本あぶくまウォーター大会 申込確認書</title>';
+        html += '<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">';
+        html += '<style>';
+        html += 'body { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-size: 12pt; color: #1e293b; margin: 0; padding: 20px; }';
+        html += 'h3 { font-size: 13pt; color: #1a3a6b; margin: 16px 0 8px; }';
+        html += '.confirmation-section { margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid #e2e8f0; }';
+        html += '.confirmation-item { display: flex; padding: 5px 0; font-size: 11pt; gap: 10px; }';
+        html += '.confirmation-item-label { font-weight: 600; color: #64748b; min-width: 130px; flex-shrink: 0; }';
+        html += '.confirmation-item-value { color: #1e293b; flex: 1; }';
+        html += '.athlete-card { background: #f8fafc; padding: 12px; border-radius: 6px; margin-bottom: 8px; border-left: 4px solid #0ea5e9; }';
+        html += '.athlete-card strong { display: block; color: #0ea5e9; margin-bottom: 6px; font-size: 11pt; }';
+        html += '.info-box { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 10pt; color: #1e40af; margin-top: 10px; }';
+        html += '.btn-row { display: none; }';
+        html += '.page-title { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 3px solid #1a3a6b; }';
+        html += '.page-title h1 { font-size: 16pt; color: #1a3a6b; margin-bottom: 4px; }';
+        html += '.page-title p { font-size: 10pt; color: #64748b; }';
+        html += '@media print { body { padding: 0; } @page { margin: 1.5cm; size: A4; } }';
+        html += '</style></head><body>';
+        html += '<div class="page-title">';
+        html += '<h1>2026全日本あぶくまウォーター大会</h1>';
+        html += '<p>申込確認書　発行日：' + today + '</p>';
+        html += '</div>';
+        html += body;
+        html += '</body></html>';
+
+        printWin.document.write(html);
+        printWin.document.close();
+        printWin.onload = function() {
+            setTimeout(function() {
+                printWin.focus();
+                printWin.print();
+            }, 600);
+        };
+        showToast('印刷ダイアログが開きます。PDFで保存してください。', 4000);
+    }
+
+    function closeConfirmation() {
+        document.getElementById('confirmationOverlay').classList.remove('show');
+        document.getElementById('applicationForm').reset();
+        document.getElementById('summarySection').classList.remove('show');
+        document.querySelector('.submit-btn').disabled = false;
+        location.reload();
+    }
+    </script>
+
+    <!--
+    ============================================================
+    📋 Google Apps Script (GAS) 設定手順
+    ============================================================
+
+    【ステップ1】Google スプレッドシートを作成
+    - Google スプレッドシートを新規作成
+    - 好きな名前を付ける（例：「あぶくま大会2026 申込データ」）
+
+    【ステップ2】GASスクリプトを作成
+    - スプレッドシートのメニュー「拡張機能」→「Apps Script」を開く
+    - 以下のコードをコピー＆ペーストする：
+
+    ─────────────────────────────────────────────────
+    function doPost(e) {
+      try {
+        const data = JSON.parse(e.postData.contents);
+        const ss = SpreadsheetApp.getActiveSpreadsheet();
+
+        // ===== シート1: 申込一覧 =====
+        let sheet = ss.getSheetByName('申込一覧') || ss.insertSheet('申込一覧');
+        if (sheet.getLastRow() === 0) {
+          sheet.appendRow(['受付日時','団体名','代表者','役職','電話','メール',
+            '選手数','合計金額','借艇K1','借艇C1','借艇普及艇',
+            '弁当5/2','弁当5/3','弁当5/4','宿泊施設','備考']);
+        }
+        const athletes = data.athletes || [];
+        sheet.appendRow([
+          data.timestamp, data.organization, data.representative, data.position,
+          data.phone, data.email, athletes.length, data.totalFee,
+          data.rental?.k1||0, data.rental?.c1||0, data.rental?.elementary||0,
+          data.lunch?.day1||0, data.lunch?.day2||0, data.lunch?.day3||0,
+          data.accommodation?.facility||'なし', data.notes||''
+        ]);
+
+        // ===== シート2: 選手一覧 =====
+        let sSheet = ss.getSheetByName('選手一覧') || ss.insertSheet('選手一覧');
+        if (sSheet.getLastRow() === 0) {
+          sSheet.appendRow(['受付日時','団体名','氏名','ふりがな','学年','性別','生年月日','参加種目','JCF番号','ベストタイム']);
+        }
+        athletes.forEach(a => {
+          sSheet.appendRow([
+            data.timestamp, data.organization,
+            a.name, a.kana, a.grade, a.gender, a.birthday,
+            a.competition, a.jcfNumber||'', a.besttime||''
+          ]);
+        });
+
+        // ===== シート3: 審判一覧 =====
+        var referees = data.referees || [];
+        if (referees.length > 0) {
+          var rSheet = ss.getSheetByName('審判一覧') || ss.insertSheet('審判一覧');
+          if (rSheet.getLastRow() === 0) {
+            rSheet.appendRow(['受付日時','所属団体名','氏名']);
+          }
+          referees.forEach(function(r) {
+            rSheet.appendRow([data.timestamp, data.organization, r]);
+          });
+        }
+
+        // ===== Gmail確認メール送信 =====
+        const subject = `【あぶくま大会2026】${data.organization} 申込受付完了`;
+        const body = `
+${data.representative} 様
+
+この度は2026全日本あぶくまウォーター大会へのお申込みをいただき、
+誠にありがとうございます。
+
+受付が完了いたしました。
+下記の内容でお申込みを承りましたのでご確認ください。
+
+なお、参加料等は4月17日（金）までにお振込みください。
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+■ 団体情報
+　団体名：${data.organization}
+　代表者：${data.representative}（${data.position}）
+　電話：${data.phone}
+
+■ 参加選手：${athletes.length}名
+${athletes.map((a,i)=>`　選手${i+1}: ${a.name}（${a.grade} / ${a.gender}）　${a.competition}`).join('\n')}
+
+■ お支払い金額：${data.totalFee}
+　振込先：ふくしま未来農業協同組合 東和支店
+　普通 0003679　口座名義：福島県カヌー協会
+　振込締切：4月17日（金）
+━━━━━━━━━━━━━━━━━━━━━━━━
+
+ご不明な点は主催者までお問い合わせください。
+大会当日のご参加をお待ちしております。
+
+福島県カヌー協会
+        `
+        GmailApp.sendEmail(data.email, subject, body);
+
+        // 主催者への通知（オプション）
+        // GmailApp.sendEmail('organizer@example.com', '新規申込: ' + data.organization, body);
+
+        return ContentService.createTextOutput(
+          JSON.stringify({ status: 'success' })
+        ).setMimeType(ContentService.MimeType.JSON);
+
+      } catch(err) {
+        return ContentService.createTextOutput(
+          JSON.stringify({ status: 'error', message: err.toString() })
+        ).setMimeType(ContentService.MimeType.JSON);
+      }
+    }
+    ─────────────────────────────────────────────────
+
+    【ステップ3】ウェブアプリとしてデプロイ
+    - GASエディタ右上「デプロイ」→「新しいデプロイ」
+    - 種類：「ウェブアプリ」
+    - 実行ユーザー：「自分」
+    - アクセス：「全員（匿名を含む）」
+    - 「デプロイ」ボタンをクリック
+    - 表示されたURLをコピー
+
+    【ステップ4】HTMLファイルにURLを貼り付け
+    - このHTMLの先頭付近「SCRIPT_URL = '...'」の部分を
+      コピーしたURLに書き換える
+
+    ============================================================
+    -->
+</body>
+</html>
