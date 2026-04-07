@@ -1292,6 +1292,24 @@
             showToast('印刷ダイアログが開きます。PDFで保存してください!', 4000);
         }
         function closeConfirmation() {
+            async function sendData() {
+const data = {
+organization: document.getElementById("organization").value,
+representative: document.getElementById("representative").value,
+email: document.getElementById("email").value
+};
+
+await fetch("ここにGASのURLを貼る", {
+method: "POST",
+body: JSON.stringify(data),
+headers: {
+"Content-Type": "application/json"
+}
+});
+
+alert("送信完了！");
+}
+</script>
             document.getElementById('confirmationOverlay').classList.remove('show');
             // フォームをリセット
             document.getElementById('applicationForm').reset();
