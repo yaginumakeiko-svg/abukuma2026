@@ -952,7 +952,7 @@
             
             // 選手情報を配列に
             const athletes = [];
-            const athleteEntries = document.querySelectorAll('.athlete-entry');
+            const athleteEntries = document.querySelectorAll('#athletesSection .athlete-entry');
             athleteEntries.forEach((entry) => {
                 const name = entry.querySelector(`input[name^="athlete_name_"]`).value;
                 const kana = entry.querySelector(`input[name^="athlete_kana_"]`).value;
