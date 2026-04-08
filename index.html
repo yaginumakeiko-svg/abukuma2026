@@ -982,6 +982,7 @@
             
             // 送信データを構築
             const submitData = {
+                timestamp: new Date().toLocaleString('ja-JP'),
                 organization: formData.get('organization'),
                 representative: formData.get('representative'),
                 position: formData.get('position'),
@@ -1011,18 +1012,10 @@
                 notes: formData.get('notes') || '',
                 totalFee: document.getElementById('totalFee').textContent
             };
-            
-            // ここにGoogle Apps ScriptのウェブアプリURLを設定してください
+
             const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx0u4R-F2QzmGHCl-4T7UQkNMzhOQMchc_dEVo1RvabPjo-8dk1cv94pyzL-nme1793fg/exec';
-            
-            if (SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE') {
-                alert('エラー: Google Apps ScriptのURLが設定されていません。\n\nセットアップ手順書を確認して、HTMLファイルの「SCRIPT_URL」を設定してください。');
-                submitBtn.disabled = false;
-                submitBtn.textContent = '申込内容を送信';
-                return;
-            }
-            
-            // Google Apps Scriptに送信
+
+            // 送信（no-corsモードのためレスポンス取得不可）
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
